@@ -6,40 +6,40 @@ export default class Form extends Component {
         super();
 
         this.state = {
-            loading: false
+            loading: false,
+            location: ''
         }
     }
 
-    getLocation() {
+    getGeolocation() {
         this.setState({ loading: true });
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.handleSuccess, this.handleError);
+            navigator.geolocation.getCurrentPosition(this.handleGeolocationSuccess, this.handleGeolocationError);
         } else {
-            this.props.handleError("Geolocation is not supported by this browser.");
+            this.props.onError("Geolocation is not supported by this browser.");
         }
     }
 
-    handleSuccess = (position) => {
-        console.log(position.coords);
+    handleGeolocationSuccess = (position) => {
         this.setState({ loading: false });
     };
 
-    handleError = (error) => {
+    handleGeolocationError = (error) => {
         this.setState({ loading: false });
 
         switch(error.code) {
             case 1:
-                this.props.handleError("User denied the request for Geolocation.");
+                this.props.onError("User denied the request for Geolocation.");
                 break;
             case 2:
-                this.props.handleError("Location information is unavailable.");
+                this.props.onError("Location information is unavailable.");
                 break;
             case 3:
-                this.props.handleError("The request to get user location timed out.");
+                this.props.onError("The request to get user location timed out.");
                 break;
             default:
-                this.props.handleError("An unknown error occurred.");
+                this.props.onError("An unknown error occurred.");
                 break;
         }
     };
@@ -49,11 +49,14 @@ export default class Form extends Component {
             <div>
                 <h1>Need Coffee?</h1>
 
-                <i className={ this.state.loading ? 'ion-loading-a' : 'ion-location'} onClick={ () => this.getLocation() } />
-                <input className="input-field" placeholder="Enter your location" type="text" />
+                <i className={ this.state.loading ? 'ion-loading-a' : 'ion-location'} onClick={ () => this.getGeolocation() } />
+                <input placeholder="Enter your location"
+                       onChange={ (e) => this.setState({ location: e.target.value })}
+                       type="text"
+                       value={ this.state.location } />
                 <br />
 
-                <button className="submit" onClick={() => {}}>Gimme Caffeine!</button>
+                <button className="submit" onClick={() => { this.props.onUpdateLocation(this.state.location) }}>Gimme Caffeine!</button>
             </div>
         );
     }
