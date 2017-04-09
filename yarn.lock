@@ -1645,6 +1645,10 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-geolocated@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-geolocated/-/react-geolocated-1.0.1.tgz#82df28374fc1a6c934c3833acbed67e0ae7eb6b3"
+
 "readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.0.2, readable-stream@^2.1.4:
   version "2.2.9"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.9.tgz#cf78ec6f4a6d1eb43d26488cac97f042e74b7fc8"

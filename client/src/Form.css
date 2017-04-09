@@ -1,0 +1,48 @@
+.ion-loading-a {
+    color: #263d37;
+    font-size: 36px;
+    margin-right: 10px;
+    position: relative;
+    top: 10px;
+}
+
+.ion-location {
+    color: #8bcc0e;
+    font-size: 36px;
+    margin-right: 10px;
+    position: relative;
+    top: 10px;
+}
+
+.ion-location:hover, .ion-location:focus {
+    color: #71ad0f;
+}
+
+button {
+    background: #347ccc;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 1px 1px 4px #DADADA;
+    color: #fff;
+    font-size: 12px;
+    margin-top: 20px;
+    padding: 12px 25px 12px 25px;
+}
+
+button:hover, button:focus {
+    background: #2e62ac;
+}
+
+input {
+    box-sizing: border-box;
+    border: 1px solid #C2C2C2;
+    box-shadow: 1px 1px 4px #EBEBEB;
+    border-radius: 3px;
+    outline: none;
+    padding: 12px;
+    width: 300px;
+}
+
+input:focus {
+    border: 1px solid #8bcc0e;
+}

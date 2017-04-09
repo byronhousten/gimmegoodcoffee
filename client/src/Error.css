@@ -1,0 +1,14 @@
+.Error {
+    background: #FFBABA;
+    color: #D8000C;
+    margin: 10px 22px;
+    padding: 12px;
+    position: relative;
+    vertical-align:middle;
+}
+
+.Error .ion-close-circled {
+    left: 10px;
+    position: absolute;
+    top: 10px;
+}
