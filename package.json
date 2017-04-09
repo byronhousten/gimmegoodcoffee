@@ -1,0 +1,19 @@
+{
+  "name": "gimmegoodcoffee",
+  "version": "1.0.0",
+  "description": "App to find good local coffeeshops",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byronhousten/gimmegoodcoffee.git"
+  },
+  "author": "Byron Housten <byron.j.housten@gmail.com> Samantha Geitz <samanthamichele7@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byronhousten/gimmegoodcoffee/issues"
+  },
+  "homepage": "https://github.com/byronhousten/gimmegoodcoffee#readme"
+}
