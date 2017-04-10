@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import Error from './Error';
 import Form from './Form';
+import Results from './Results';
 
 export default class App extends Component {
     constructor() {
@@ -13,7 +14,7 @@ export default class App extends Component {
         this.state = {
             error: null,
             latitude: null,
-            location: null,
+            loading: false,
             longitude: null,
             results: []
         }
@@ -22,22 +23,40 @@ export default class App extends Component {
     handleUpdateLatitudeLongitude(latitude, longitude) {
       this.setState({ latitude, longitude });
 
-        axios(`/api/search?latitude=${ latitude }&longitude=${ longitude }`);
+        axios(`/api/search?latitude=${ latitude }&longitude=${ longitude }`)
+            .then(response => {
+                this.setState({
+                    loading: false,
+                    results: response.data.body.businesses
+                });
+            });
     }
 
-    handleUpdateLocation(location) {
-        this.setState({ location });
+    renderLoading() {
+        if (this.state.loading) {
+            return (
+                <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '100px' }}>
+                    <i className="ion-loading-a" />
+                </div>
+            );
+        }
 
-        axios(`/api/search?location=${ location }`);
+        return '';
     }
 
     render() {
         return (
             <div className="App">
                 { this.state.error ? <Error error={ this.state.error } /> : '' }
-                { this.state.results.length ? '' : <Form onError={ (error) => this.setState({error}) }
-                                                         onUpdateLatitudeLongitude={ (latitude, longitude) => this.handleUpdateLatitudeLongitude(latitude, longitude) }
-                                                         onUpdateLocation={(location) => { this.handleUpdateLocation(location) }} /> }
+
+                <Form onError={ (error) => this.setState({error}) }
+                      onLoading={ () => this.setState({ loading: true }) }
+                      onUpdateLatitudeLongitude={ (latitude, longitude) => this.handleUpdateLatitudeLongitude(latitude, longitude) } />
+
+                { this.renderLoading() }
+
+                { this.state.results.length && ! this.state.loading ? <Results latitude={ this.state.latitude } longitude={ this.state.longitude } /> : '' }
+
             </div>
         );
     }

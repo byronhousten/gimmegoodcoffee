@@ -14,6 +14,19 @@ app.get('/api/', (req, res) => {
     });
 });
 
+app.get('/api/geocode', (req, res) => {
+    request({
+        method: 'GET',
+        uri: `https://maps.google.com/maps/api/geocode/json?address=${ req.query.address }`
+    }).then(response => {
+        res.status(200).json({
+            body: JSON.parse(response)
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+});
+
 app.get('/api/search', (req, res) => {
     search(req.query).then((response) => {
         res.status(200).json({

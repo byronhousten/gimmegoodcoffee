@@ -32,7 +32,6 @@
     "foreman": "^2.0.0",
     "node-fetch": "^1.6.3",
     "nodemon": "^1.11.0",
-    "react-geolocated": "^1.0.1",
     "request-promise": "^4.2.0"
   }
 }

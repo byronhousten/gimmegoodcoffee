@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Form.css';
 
+import axios from 'axios';
+
 export default class Form extends Component {
     constructor() {
         super();
@@ -23,6 +25,11 @@ export default class Form extends Component {
 
     handleGeolocationSuccess = (position) => {
         this.setState({ loading: false });
+
+        this.props.onUpdateLatitudeLongitude(
+            position.coords.latitude,
+            position.coords.longitude
+        );
     };
 
     handleGeolocationError = (error) => {
@@ -44,9 +51,21 @@ export default class Form extends Component {
         }
     };
 
+    handleGeocodeFromAddress() {
+        this.props.onLoading();
+
+        axios(`/api/geocode?address=${ this.state.location }`)
+            .then(response => {
+                this.props.onUpdateLatitudeLongitude(
+                    response.data.body.results[0].geometry.location.lat,
+                    response.data.body.results[0].geometry.location.lng
+                );
+            });
+    }
+
     render() {
         return (
-            <div>
+            <div className="Form">
                 <h1>Need Coffee?</h1>
 
                 <i className={ this.state.loading ? 'ion-loading-a' : 'ion-location'} onClick={ () => this.getGeolocation() } />
@@ -56,7 +75,7 @@ export default class Form extends Component {
                        value={ this.state.location } />
                 <br />
 
-                <button className="submit" onClick={() => { this.props.onUpdateLocation(this.state.location) }}>Gimme Caffeine!</button>
+                <button className="submit" onClick={ () => { this.handleGeocodeFromAddress() }}>Gimme Caffeine!</button>
             </div>
         );
     }

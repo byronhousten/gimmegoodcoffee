@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "dotenv": "^4.0.0",
     "react": "^15.5.3",
-    "react-dom": "^15.5.3"
+    "react-dom": "^15.5.3",
+    "react-mapbox-gl": "^1.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
